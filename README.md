@@ -1,50 +1,36 @@
 # Shipping Rate Engine
 
-Very basic Python project to calculate shipping cost.
-
-This repository now also includes a very simple HTML page.
-
-## What It Does
-
-- Reads package weight (kg)
-- Reads shipping rate (USD per kg)
-- Calculates: `shipping_cost = weight * rate`
-- Displays the result in USD
-
-## File
-
-- `Shipping_Cost_Calculator.py`: Main script
-- `web/index.html`: Simple HTML page with JavaScript calculator
-- `web/styles.css`: Basic styling
+Very basic project to calculate shipping cost.
 
 ## Requirements
 
 - Python 3.x
 
-## Run
+## Quick Start
+
+1. Run Python:
 
 ```bash
 python Shipping_Cost_Calculator.py
 ```
 
-No server is required for this Python script.
+2. Open in browser:
 
-## Run HTML Page (Very Simple)
+```text
+http://127.0.0.1:8000/
+```
 
-1. Open `web/index.html` in your browser.
-2. Enter weight and rate.
-3. Click **Calculate**.
+3. Enter weight and rate, then click **Calculate**.
+
+The calculation is done by Python (`/calculate` endpoint).
 
 ## Example
 
-Input:
-- Weight: `10`
-- Rate: `2.5`
+Input: weight `10`, rate `2.5`
 
-Output:
-- `Shipping Cost: 25.00 USD`
+Output: `Shipping Cost: 25.00 USD`
 
-## Basic Validation
+## Notes
 
-- Shows an error if input is not numeric
-- Shows an error if weight or rate is negative
+- Do not use `python -m http.server` for this project.
+- Start with `python Shipping_Cost_Calculator.py`.

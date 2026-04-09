@@ -31,7 +31,7 @@
       const calculateButton = document.getElementById("calculate");
       const resultBox = document.getElementById("result");
 
-      calculateButton.addEventListener("click", function () {
+      calculateButton.addEventListener("click", async function () {
         const weightText = weightInput.value.trim();
         const rateText = rateInput.value.trim();
 
@@ -53,8 +53,26 @@
           return;
         }
 
-        const shippingCost = (weight * rate).toFixed(2);
-        resultBox.textContent = "Shipping Cost: " + shippingCost + " USD";
+        try {
+          const response = await fetch("/calculate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ weight: weight, rate: rate }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok || !data.ok) {
+            resultBox.textContent = "Error: " + (data.error || "Calculation failed.");
+            return;
+          }
+
+          resultBox.textContent = "Shipping Cost: " + data.shipping_cost.toFixed(2) + " USD";
+        } catch (_error) {
+          resultBox.textContent = "Error: Python server is not running.";
+        }
       });
     </script>
   </body>
