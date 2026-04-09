@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shipping Rate Engine</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="card">
+      <h1>Shipping Rate Engine</h1>
+      <p>Very simple shipping cost calculator.</p>
+
+      <label>
+        Weight (kg)
+        <input id="weight" type="number" min="0" step="0.01" placeholder="e.g. 10" />
+      </label>
+
+      <label>
+        Rate (USD/kg)
+        <input id="rate" type="number" min="0" step="0.01" placeholder="e.g. 2.5" />
+      </label>
+
+      <button id="calculate" type="button">Calculate</button>
+      <div id="result" class="result" aria-live="polite"></div>
+    </main>
+
+    <script>
+      const weightInput = document.getElementById("weight");
+      const rateInput = document.getElementById("rate");
+      const calculateButton = document.getElementById("calculate");
+      const resultBox = document.getElementById("result");
+
+      calculateButton.addEventListener("click", function () {
+        const weightText = weightInput.value.trim();
+        const rateText = rateInput.value.trim();
+
+        if (weightText === "" || rateText === "") {
+          resultBox.textContent = "Error: Please fill in both fields.";
+          return;
+        }
+
+        const weight = Number(weightText);
+        const rate = Number(rateText);
+
+        if (Number.isNaN(weight) || Number.isNaN(rate)) {
+          resultBox.textContent = "Error: Please enter valid numbers.";
+          return;
+        }
+
+        if (weight < 0 || rate < 0) {
+          resultBox.textContent = "Error: Values must be non-negative.";
+          return;
+        }
+
+        const shippingCost = (weight * rate).toFixed(2);
+        resultBox.textContent = "Shipping Cost: " + shippingCost + " USD";
+      });
+    </script>
+  </body>
+</html>
